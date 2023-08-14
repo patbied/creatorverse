@@ -25,6 +25,7 @@ const EditCreator = () => {
         setDescription(data[0]?.description)
         setSocialMediaURL(data[0]?.url)
         setCreatorId(data[0]?.id)
+
         setLoading(false)
         console.log(data)
         
@@ -48,8 +49,12 @@ const EditCreator = () => {
       }
     }
 
-    
-      const {data,error} = await supabase.from('creators').update({name,description,url:socialMediaURL,imageURL}).eq('id',creatorId)
+      if (image){
+        const {data,error} = await supabase.from('creators').update({name,description,url:socialMediaURL,imageURL}).eq('id',creatorId)
+      } else {
+        const {data,error} = await supabase.from('creators').update({name,description,url:socialMediaURL}).eq('id',creatorId)
+      }
+      
       if (!error){
         setSuccess(true)
       } else {

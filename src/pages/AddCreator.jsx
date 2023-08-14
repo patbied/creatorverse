@@ -24,15 +24,19 @@ const AddCreator = () => {
       }
     }
     //Add user to database
-    if (name && description && socialMediaURL){
-      const {data} = await supabase.from('creators').insert({name,description,url:socialMediaURL,imageURL})
-    }else{
-      setError(true)
-    }
+    
+      const {data,error} = await supabase.from('creators').insert({name,description,url:socialMediaURL,imageURL})
+      if (!error){
+        setSuccess(true)
+      } else {
+        setError(true)
+      }
   }
   return (
     <div style={{textAlign:'center'}} className='container-fluid'>
       <h1>Add a creator</h1>
+      {success && <h2 style={{color:'green'}}>Succesfully Added!</h2>}
+      {error && <h2 style={{color:'red'}}>An error occured.</h2>}
       <article>
         <form onSubmit={addCreator}>
           {error && <p style={{color:'red'}}>Please fill in all fields.</p>}
