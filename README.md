@@ -34,7 +34,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 https://imgur.com/a/8Vx0f58
-👉🏿<img src='https://imgur.com/a/8Vx0f58' title='Patrick Biedermann - Creatorverse Video Walkthrough' width='' alt='Patrick Biedermann - Creatorverse Video Walkthrough' />
+👉🏿<img src='https://imgur.com/a/8Vx0f58.gif' title='Patrick Biedermann - Creatorverse Video Walkthrough' width='' alt='Patrick Biedermann - Creatorverse Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with LiceCap
