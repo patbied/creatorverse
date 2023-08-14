@@ -6,7 +6,8 @@ const AddCreator = () => {
   const [socialMediaURL, setSocialMediaURL] = useState("")
   const [error, setError] = useState(false)
   const [image,setImage] = useState("")
-  
+  const [success, setSuccess] = useState(false)
+  const [loading,setLoading] = useState(false)
   const addCreator = async(e) => {
     e.preventDefault()
     //Save image to bucket

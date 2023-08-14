@@ -12,12 +12,14 @@ const EditCreator = () => {
   const [creatorId,setCreatorId] = useState()
   const {id} = useParams()
   const [image,setImage] = useState("")
+  const [success, setSuccess] = useState(false)
 
 
   useEffect(() => {
     const fetchCreator = async() => {
         setLoading(true)
         const {data,error} = await supabase.from('creators').select("*").eq('id',id)
+
         setName(data[0]?.name)
         setDisplayName(data[0]?.name)
         setDescription(data[0]?.description)
@@ -32,7 +34,7 @@ const EditCreator = () => {
   
   const editCreator = async(e) => {
     e.preventDefault()
-
+    setLoading(true)
     let imageURL = ""
     if (image){
       const {data,error} = await supabase.storage.from("creatorimages").upload(`${Date.now()}_${image.name}`,image)
@@ -46,18 +48,25 @@ const EditCreator = () => {
       }
     }
 
-    if (name && description && socialMediaURL){
-      const {data} = await supabase.from('creators').update({name,description,url:socialMediaURL,imageURL}).eq('id',creatorId)
-    }else{
-      setError(true)
-    }
+    
+      const {data,error} = await supabase.from('creators').update({name,description,url:socialMediaURL,imageURL}).eq('id',creatorId)
+      if (!error){
+        setSuccess(true)
+      } else {
+        setError(false)
+      }
+      setLoading(false)
   }
 
   return (
     <div style={{textAlign:'center'}} className='container-fluid'>
       {loading ? <progress></progress> : ( 
+    
         <> 
+        
       <h1>Change {displayName && displayName}</h1>
+      {success && <h2 style={{color:'green'}}>Succesfully edited!</h2>}
+      {error && <h2 style={{color:'red'}}>An error occured.</h2>}
       <article>
         <form onSubmit={editCreator}>
           {error && <p style={{color:'red'}}>Please fill in all fields.</p>}
