@@ -11,7 +11,7 @@ const ContentCreatorCard = ({creator,fetch,viewSingle}) => {
   return (
     <article>
     {!viewSingle && creator.name && <h1>{creator.name}</h1>}
-    {creator.imageURL && <img style={{borderRadius:'30%',maxHeight: '100px',maxWidth:'100px'}} src={`https://rqelvcsuhvltahitjrkh.supabase.co/storage/v1/object/public/creatorimages/${creator.imageURL}`} alt={`${creator?.name} image`}/>}
+    {creator.imageURL && <img style={{borderRadius:'30%',height: '100px',width:'100px'}} src={`https://rqelvcsuhvltahitjrkh.supabase.co/storage/v1/object/public/creatorimages/${creator.imageURL}`} alt={`${creator?.name} image`}/>}
     <p>Description: {creator.description}</p>
     <p><a target='_blank' href={creator.url}>Social Media Page</a></p>    
     {!viewSingle &&<Link to={`/view-creator/${creator.id}`}><button>View creator</button></Link>}
